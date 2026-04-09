@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefroom · Editorial Intelligence for Digital Publishers</title>
+<meta name="description" content="Briefroom monitort 200+ redactionele signalen en genereert publicatieklare briefs. Bespaar €72.000 aan redactietijd per jaar.">
+<link rel="canonical" href="https://briefroom.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://briefroom.io/">
+<meta property="og:title" content="Briefroom · Editorial Intelligence for Digital Publishers">
+<meta property="og:description" content="Monitor 200+ editorial signals. Generate publication-ready briefs. Save €72,000 in editorial time per year.">
+<meta property="og:image" content="https://briefroom.io/briefroom-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Briefroom · Editorial Intelligence for Digital Publishers">
+<meta name="twitter:description" content="Monitor 200+ editorial signals. Generate publication-ready briefs.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/svg+xml" href="briefroom-icon.svg">
+<link rel="alternate icon" type="image/png" href="briefroom-icon.png">
+<link rel="apple-touch-icon" href="briefroom-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0F2147;
+  --navy-mid:   #1A3460;
+  --navy-light: #2A4A80;
+  --blue:       #2F6FED;
+  --blue-lt:    #EBF1FD;
+  --blue-mid:   #D0E0FA;
+  --ink:        #1A1F2E;
+  --ink-mid:    #4A5568;
+  --ink-light:  #8896A9;
+  --surface:    #F7F8FA;
+  --surface-mid:#EDF0F4;
+  --white:      #FFFFFF;
+  --rule:       #E2E6ED;
+  --green:      #1A9E6E;
+  --green-lt:   #D1F0E5;
+  --amber:      #E8821A;
+  --amber-lt:   #FDE8CC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 60px;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-back {
+  font-size: 0.78rem; font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none; letter-spacing: 0.03em;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: rgba(255,255,255,0.8); }
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logomark {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; flex-shrink: 0;
+}
+.nav-logomark svg { width: 28px; height: 28px; display: block; }
+.nav-wordmark {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800; font-size: 1rem;
+  letter-spacing: -0.02em; color: white;
+}
+.nav-actions {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.nav-login {
+  font-size: 0.78rem; font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none; letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.nav-login:hover { color: rgba(255,255,255,0.9); }
+.nav-cta {
+  background: var(--blue);
+  color: white;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 7px 18px; border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #2560d4; }
+.nav-hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: rgba(255,255,255,0.7); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+  background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-direction: column; padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 0.95rem; font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none; padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: white; }
+.mobile-menu .mob-cta {
+  margin-top: 1rem; background: var(--blue);
+  color: white; text-align: center;
+  padding: 13px; border-radius: 6px; border: none;
+  font-weight: 600; font-size: 0.9rem;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--navy);
+  padding: 140px 3rem 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(47,111,237,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: rgba(255,255,255,0.06);
+}
+
+/* subtle grid */
+.hero-grid-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(47,111,237,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47,111,237,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 420px; gap: 5rem; align-items: center;
+  position: relative;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
+}
+.hero-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.03em; color: white;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.25s forwards;
+}
+.hero-headline em { color: var(--blue); font-style: normal; }
+.hero-sub {
+  font-size: 1.05rem; font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75; margin-bottom: 2.5rem; max-width: 480px;
+  opacity: 0; animation: fadeUp 0.7s ease 0.4s forwards;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.7s ease 0.7s forwards;
+}
+.btn-primary {
+  background: var(--blue); color: white;
+  font-size: 0.88rem; font-weight: 600;
+  letter-spacing: 0.02em; padding: 13px 28px;
+  border-radius: 8px; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: #2560d4; transform: translateY(-1px); }
+.btn-secondary {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.88rem; font-weight: 500;
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px; transition: color 0.2s, border-color 0.2s;
+}
+.btn-secondary:hover { color: white; border-color: rgba(255,255,255,0.5); }
+
+/* Hero card */
+.hero-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 2rem;
+  backdrop-filter: blur(8px);
+  opacity: 0; animation: fadeUp 0.7s ease 0.45s forwards;
+}
+.hero-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 1.25rem;
+}
+.hero-stat-row {
+  display: flex; flex-direction: column; gap: 1px;
+  margin-bottom: 1.5rem;
+}
+.hero-stat {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hero-stat:last-child { border-bottom: none; }
+.hero-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.hero-stat-value {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.1rem; font-weight: 700; color: white;
+}
+.hero-stat-value.blue { color: var(--blue); }
+.hero-stat-value.green { color: #4ade80; }
+.hero-card-note {
+  font-size: 0.72rem; color: rgba(255,255,255,0.2);
+  line-height: 1.5; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─── SECTION SCAFFOLDING ─── */
+.section { padding: 6rem 3rem; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 1rem;
+}
+.section-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.1; color: var(--ink); margin-bottom: 1rem;
+}
+.section-headline.on-dark { color: white; }
+.section-sub {
+  font-size: 1rem; color: var(--ink-mid);
+  max-width: 560px; line-height: 1.75; margin-bottom: 3rem;
+}
+.section-sub.on-dark { color: rgba(255,255,255,0.5); }
+
+/* ─── PROBLEM SECTION ─── */
+.problem { background: var(--surface); }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin-top: 3rem;
+}
+.problem-item {
+  background: white; padding: 2.5rem 2rem;
+  position: relative;
+}
+.problem-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--rule);
+}
+.problem-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: #C8CDD6; line-height: 1;
+  margin-bottom: 1rem;
+}
+.problem-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+}
+.problem-body { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.65; }
+.problem-kicker {
+  display: inline-block; margin-top: 1rem;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.9rem; font-weight: 700;
+  color: var(--ink); background: var(--amber-lt);
+  padding: 4px 10px; border-radius: 4px;
+}
+
+/* ─── WORKFLOW ─── */
+.workflow { background: var(--navy); padding: 6rem 3rem; }
+.workflow-steps {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 2px; margin-top: 3rem; position: relative;
+}
+.workflow-step {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 2rem 1.5rem;
+  border-radius: 10px; position: relative;
+}
+.workflow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute; right: -14px; top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.2); font-size: 1rem; z-index: 1;
+}
+.workflow-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; color: var(--blue);
+  letter-spacing: 0.15em; margin-bottom: 1rem;
+}
+.workflow-icon {
+  width: 36px; height: 36px;
+  background: rgba(47,111,237,0.15);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1rem;
+}
+.workflow-icon svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.workflow-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.95rem; font-weight: 700; color: white;
+  margin-bottom: 0.5rem; letter-spacing: -0.01em;
+}
+.workflow-body { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+.workflow-assistant {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 4px 9px; border-radius: 4px;
+}
+
+/* ─── BRIEFING ASSISTANT CALLOUT ─── */
+.assistant-callout {
+  margin-top: 2px;
+  background: rgba(47,111,237,0.12);
+  border: 1px solid rgba(47,111,237,0.25);
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: center;
+}
+.assistant-callout-left {
+  display: flex; align-items: center; gap: 1rem;
+  flex-shrink: 0;
+}
+.assistant-callout-icon {
+  width: 44px; height: 44px;
+  background: rgba(47,111,237,0.25);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.assistant-callout-icon svg {
+  width: 20px; height: 20px; stroke: var(--blue);
+}
+.assistant-callout-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 4px;
+}
+.assistant-callout-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem; font-weight: 700; color: white;
+  letter-spacing: -0.01em; white-space: nowrap;
+}
+.assistant-callout-body {
+  font-size: 0.83rem; color: rgba(255,255,255,0.45);
+  line-height: 1.7; margin: 0;
+}
+
+@media (max-width: 680px) {
+  .assistant-callout { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem; }
+  .assistant-callout-title { white-space: normal; }
+}
+.workflow-badge {
+  display: inline-block; margin-top: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px;
+  background: rgba(47,111,237,0.2); color: var(--blue);
+}
+.workflow-badge.green { background: rgba(26,158,110,0.2); color: #4ade80; }
+
+/* ─── OUTCOMES BREAKDOWN ─── */
+.outcomes-breakdown {
+  margin-top: 2.5rem;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.outcomes-breakdown-row {
+  display: grid; grid-template-columns: 1fr auto 200px;
+  align-items: center; gap: 2rem;
+  background: var(--surface); padding: 1.5rem 2rem;
+}
+.outcomes-breakdown-row.total {
+  background: var(--navy);
+}
+.outcomes-breakdown-item {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.outcomes-breakdown-label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.outcomes-breakdown-row.total .outcomes-breakdown-label { color: white; }
+.outcomes-breakdown-calc {
+  font-size: 0.78rem; color: var(--ink-light); line-height: 1.4;
+  font-family: 'DM Mono', monospace;
+}
+.outcomes-breakdown-row.total .outcomes-breakdown-calc { color: rgba(255,255,255,0.35); }
+.outcomes-breakdown-equals {
+  font-size: 1.2rem; color: var(--blue); font-weight: 700;
+}
+.outcomes-breakdown-result {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.3rem; font-weight: 900; color: var(--blue);
+  letter-spacing: -0.02em; text-align: right;
+}
+.outcomes-breakdown-row.total .outcomes-breakdown-result {
+  font-size: 1.5rem; color: #4ade80;
+}
+
+@media (max-width: 680px) {
+  .outcomes-breakdown-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .outcomes-breakdown-equals { display: none; }
+  .outcomes-breakdown-result { text-align: left; }
+}
+
+/* ─── OUTCOMES ─── */
+.outcomes { background: white; }
+.outcomes-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-top: 3rem;
+}
+.outcome-card {
+  padding: 3rem; background: var(--surface);
+}
+.outcome-card.dark { background: var(--navy); }
+.outcome-card.blue-tint { background: var(--blue-lt); }
+.outcome-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 0.75rem;
+}
+.outcome-card.dark .outcome-eyebrow { color: rgba(255,255,255,0.35); }
+.outcome-card.blue-tint .outcome-eyebrow { color: var(--blue); }
+.outcome-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900; line-height: 1;
+  color: var(--ink); margin-bottom: 0.5rem;
+}
+.outcome-card.dark .outcome-num { color: white; }
+.outcome-card.blue-tint .outcome-num { color: var(--navy); }
+.outcome-desc { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.6; }
+.outcome-card.dark .outcome-desc { color: rgba(255,255,255,0.45); }
+.outcome-card.blue-tint .outcome-desc { color: var(--navy-mid); }
+
+/* Full-width ROI bar */
+.roi-bar {
+  background: var(--blue); padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+  max-width: 100%;
+}
+.roi-bar-left { }
+.roi-bar-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 0.5rem;
+}
+.roi-bar-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900; color: white;
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+.roi-bar-headline span { opacity: 0.5; }
+.roi-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+}
+.roi-stat { }
+.roi-stat-num {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.6rem; font-weight: 900; color: white;
+  line-height: 1;
+}
+.roi-stat-label {
+  font-size: 0.72rem; color: rgba(255,255,255,0.55);
+  margin-top: 3px; line-height: 1.3;
+}
+.roi-note {
+  font-size: 0.7rem; color: rgba(255,255,255,0.3);
+  margin-top: 0.75rem; line-height: 1.5;
+}
+
+/* ─── FEATURES ─── */
+.features { background: var(--surface); }
+.features-groups {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px; margin-top: 3rem;
+}
+.feature-group {
+  background: white; padding: 2.5rem 2rem;
+}
+.feature-group-icon {
+  width: 40px; height: 40px;
+  background: var(--blue-lt); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.feature-group-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.feature-group-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 0.35rem; letter-spacing: -0.02em;
+}
+.feature-group-sub {
+  font-size: 0.78rem; color: var(--ink-light);
+  margin-bottom: 1.25rem; line-height: 1.5;
+}
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.feature-list li {
+  font-size: 0.82rem; color: var(--ink-mid);
+  padding-left: 1.1rem; position: relative; line-height: 1.5;
+}
+.feature-list li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--blue);
+}
+.feature-tier {
+  display: inline-block; margin-top: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px;
+}
+.tier-start { background: var(--blue-lt); color: var(--blue); }
+.tier-scale { background: var(--green-lt); color: var(--green); }
+
+/* ─── PRICING ─── */
+.pricing { background: white; }
+.pricing-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px;
+  margin-top: 3rem;
+}
+.pricing-card {
+  padding: 3rem; background: var(--surface);
+  position: relative;
+}
+.pricing-card.featured {
+  background: var(--navy);
+  border: 2px solid var(--blue);
+}
+.pricing-card.enterprise {
+  background: var(--ink);
+}
+.pricing-badge {
+  display: inline-block; margin-bottom: 1.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  background: var(--blue-lt); color: var(--blue);
+}
+.pricing-card.featured .pricing-badge {
+  background: rgba(47,111,237,0.2); color: var(--blue);
+}
+.pricing-tier {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.5rem; font-weight: 900; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 0.25rem;
+}
+.pricing-card.featured .pricing-tier { color: white; }
+.pricing-target {
+  font-size: 0.82rem; color: var(--ink-light);
+  margin-bottom: 2rem;
+}
+.pricing-card.featured .pricing-target { color: rgba(255,255,255,0.4); }
+.pricing-price-row {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+.pricing-setup-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 0.25rem;
+}
+.pricing-card.featured .pricing-setup-label { color: rgba(255,255,255,0.3); }
+.pricing-setup-val {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.6rem; font-weight: 900; color: var(--ink);
+}
+.pricing-setup-waived {
+  display: block;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.3rem; font-weight: 900;
+  color: var(--green); letter-spacing: -0.02em;
+  line-height: 1.1; margin-top: 2px;
+}
+
+.pricing-card.featured .pricing-setup-val { color: white; }
+.pricing-setup-note {
+  font-size: 0.75rem; color: var(--ink-light); margin-bottom: 1.5rem;
+}
+.pricing-card.featured .pricing-setup-note { color: rgba(255,255,255,0.35); }
+.pricing-retainer-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 0.25rem;
+}
+.pricing-card.featured .pricing-retainer-label { color: rgba(255,255,255,0.3); }
+.pricing-retainer-val {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.6rem; font-weight: 900; color: var(--blue);
+}
+.pricing-retainer-note {
+  font-size: 0.75rem; color: var(--ink-light); margin-bottom: 2rem;
+}
+.pricing-card.featured .pricing-retainer-note { color: rgba(255,255,255,0.35); }
+.pricing-divider {
+  height: 1px; background: var(--rule); margin-bottom: 1.5rem;
+}
+.pricing-card.featured .pricing-divider { background: rgba(255,255,255,0.08); }
+.pricing-includes {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-light); margin-bottom: 0.75rem;
+}
+.pricing-card.featured .pricing-includes { color: rgba(255,255,255,0.3); }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 2.5rem; }
+.pricing-features li {
+  font-size: 0.83rem; color: var(--ink-mid);
+  padding-left: 1.25rem; position: relative; line-height: 1.5;
+}
+.pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.6); }
+.pricing-features li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--green); font-size: 0.75rem; font-weight: 700;
+}
+.pricing-btn {
+  display: block; text-align: center;
+  padding: 13px 24px; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.pricing-btn-outline {
+  border: 1.5px solid var(--rule); color: var(--ink);
+  background: white;
+}
+.pricing-btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+.pricing-btn-solid {
+  background: var(--blue); color: white; border: none;
+}
+.pricing-btn-solid:hover { background: #2560d4; }
+.pricing-btn-enterprise {
+  background: transparent; color: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(255,255,255,0.2);
+}
+.pricing-btn-enterprise:hover { border-color: rgba(255,255,255,0.5); color: white; }
+.pricing-badge-enterprise {
+  background: rgba(255,255,255,0.08) !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+.pricing-card.enterprise .pricing-tier { color: white; }
+.pricing-card.enterprise .pricing-target { color: rgba(255,255,255,0.35); }
+.pricing-card.enterprise .pricing-setup-label { color: rgba(255,255,255,0.3); }
+.pricing-custom { color: rgba(255,255,255,0.9) !important; }
+.pricing-card.enterprise .pricing-setup-note { color: rgba(255,255,255,0.3); }
+.pricing-card.enterprise .pricing-divider { background: rgba(255,255,255,0.06); }
+.pricing-card.enterprise .pricing-includes { color: rgba(255,255,255,0.25); }
+.pricing-card.enterprise .pricing-features li { color: rgba(255,255,255,0.5); }
+.pricing-note {
+  text-align: center; margin-top: 2rem;
+  font-size: 0.78rem; color: var(--ink-light);
+}
+.pricing-tier-summary {
+  font-size: 0.85rem; color: var(--ink-mid);
+  line-height: 1.7; margin-bottom: 2rem;
+}
+.pricing-card.featured .pricing-tier-summary { color: rgba(255,255,255,0.55); }
+
+/* ─── PILOT / GUARANTEE ─── */
+.pilot { background: var(--surface); }
+.pilot-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-top: 3rem;
+}
+.pilot-left {
+  background: var(--navy); padding: 3rem;
+}
+.pilot-right {
+  background: white; padding: 3rem;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.pilot-spots {
+  display: flex; gap: 8px; margin-bottom: 1.5rem;
+}
+.pilot-spot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.pilot-spot.filled { background: var(--blue); }
+.pilot-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 900; color: white;
+  letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.pilot-sub {
+  font-size: 0.88rem; color: rgba(255,255,255,0.45);
+  line-height: 1.7; margin-bottom: 2rem;
+}
+.pilot-ref {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1.5rem;
+}
+.pilot-ref-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom: 0.5rem;
+}
+.pilot-ref-text {
+  font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.6;
+}
+.guarantee-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-lt); color: var(--green);
+  padding: 6px 14px; border-radius: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 1.5rem;
+}
+.guarantee-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1.25rem; font-weight: 800; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 0.75rem;
+}
+.guarantee-body {
+  font-size: 0.88rem; color: var(--ink-mid);
+  line-height: 1.7; margin-bottom: 2rem;
+}
+.guarantee-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.guarantee-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.83rem; color: var(--ink-mid); line-height: 1.5;
+}
+.guarantee-list li span:first-child {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--green-lt); color: var(--green);
+  font-size: 0.7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* ─── FINAL CTA ─── */
+.final-cta {
+  background: var(--navy); padding: 7rem 3rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: '';
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(47,111,237,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.final-cta-inner { position: relative; max-width: 680px; margin: 0 auto; }
+.final-cta-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 1.5rem;
+}
+.final-cta-headline {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; color: white;
+  letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+.final-cta-sub {
+  font-size: 1rem; color: rgba(255,255,255,0.45);
+  line-height: 1.75; margin-bottom: 2.5rem;
+}
+.final-cta-actions {
+  display: flex; justify-content: center;
+  align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.btn-white {
+  background: white; color: var(--navy);
+  font-size: 0.88rem; font-weight: 700;
+  padding: 14px 32px; border-radius: 8px;
+  text-decoration: none; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-white:hover { background: var(--blue-lt); }
+.btn-ghost-white {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.85rem; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  padding-bottom: 2px; transition: all 0.2s;
+}
+.btn-ghost-white:hover { color: white; border-color: rgba(255,255,255,0.4); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink); padding: 2rem 3rem;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-left {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  color: rgba(255,255,255,0.3); letter-spacing: -0.01em;
+}
+.footer-left span { color: var(--blue); }
+.footer-parent {
+  font-size: 0.72rem; color: rgba(255,255,255,0.18);
+  font-family: 'DM Mono', monospace; letter-spacing: 0.08em;
+}
+.footer-right { display: flex; gap: 1.5rem; }
+.footer-right a {
+  font-size: 0.75rem; color: rgba(255,255,255,0.25);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-right a:hover { color: rgba(255,255,255,0.6); }
+
+/* ─── HERO TRUST BAR ─── */
+.hero-trust {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards;
+}
+.hero-trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; color: rgba(255,255,255,0.5);
+}
+.hero-trust-item svg { stroke: var(--green); flex-shrink: 0; }
+
+/* ─── TESTIMONIAL PLACEHOLDER ─── */
+.testimonial-section {
+  background: var(--surface);
+  padding: 4rem 3rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.testimonial-placeholder {
+  max-width: 720px; margin: 0 auto;
+  background: white; border: 2px dashed var(--rule);
+  border-radius: 12px; padding: 2.5rem 3rem;
+  text-align: center; position: relative;
+}
+.testimonial-quote-mark {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 5rem; font-weight: 900; line-height: 1;
+  color: var(--blue-mid); margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+.testimonial-text {
+  font-size: 0.85rem; color: var(--ink-light);
+  line-height: 1.7; font-style: italic; margin-bottom: 1.5rem;
+}
+.testimonial-attr { }
+.testimonial-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.88rem; font-weight: 700; color: var(--ink-light);
+}
+.testimonial-role { font-size: 0.75rem; color: var(--ink-light); margin-top: 3px; }
+
+/* ─── EPIPHANY BRIDGE ─── */
+.epiphany {
+  display: flex; gap: 2rem; align-items: flex-start;
+  margin: 3rem 0 0; padding-top: 3rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.epiphany-line {
+  width: 3px; flex-shrink: 0;
+  background: var(--blue); border-radius: 2px;
+  min-height: 80px; margin-top: 4px;
+}
+.epiphany-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 0.75rem;
+}
+.epiphany-text {
+  font-size: 0.92rem; color: rgba(255,255,255,0.55);
+  line-height: 1.75; font-style: italic; margin-bottom: 0.75rem;
+}
+.epiphany-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; color: rgba(255,255,255,0.25);
+  letter-spacing: 0.06em;
+}
+
+/* ─── PRICING URGENCY ─── */
+.pricing-urgency {
+  display: inline-block; margin-bottom: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 4px;
+  background: var(--amber-lt); color: var(--amber);
+  font-weight: 500;
+}
+
+/* ─── PRICING SECONDARY CTA ─── */
+.pricing-secondary-cta {
+  margin-top: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 10px; padding: 2rem;
+}
+.pricing-secondary-inner {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.pricing-secondary-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 0.4rem; letter-spacing: -0.02em;
+}
+.pricing-secondary-sub {
+  font-size: 0.82rem; color: var(--ink-light);
+  line-height: 1.6; max-width: 480px;
+}
+.pricing-secondary-btn {
+  white-space: nowrap;
+  font-size: 0.83rem; font-weight: 600;
+  color: var(--blue); text-decoration: none;
+  border: 1.5px solid var(--blue);
+  padding: 10px 20px; border-radius: 7px;
+  transition: all 0.2s; flex-shrink: 0;
+}
+.pricing-secondary-btn:hover { background: var(--blue); color: white; }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── RESPONSIVE 900px ─── */
+/* ─── RESPONSIVE 900px (tablet) ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-back { display: none; }
+  .nav-actions { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .hero { padding: 100px 1.5rem 4rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-card { display: none; }
+
+  .section { padding: 4rem 1.5rem; }
+  .problem-grid { grid-template-columns: 1fr; }
+
+  .workflow { padding: 4rem 1.5rem; }
+  .workflow-steps { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .workflow-step::after { display: none; }
+
+  .outcomes-breakdown-row { grid-template-columns: 1fr auto 180px; gap: 1rem; }
+  .roi-bar { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  .roi-stats { gap: 1.5rem; flex-wrap: wrap; }
+
+  .features-groups { grid-template-columns: 1fr; }
+
+  .pricing-grid { grid-template-columns: 1fr; }
+
+  .pilot-inner { grid-template-columns: 1fr; }
+
+  .final-cta { padding: 5rem 1.5rem; }
+  .final-cta-actions { flex-wrap: wrap; justify-content: center; }
+
+  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+
+  /* New sections added post-review */
+  [style*="padding: 5rem 3rem"], [style*="padding: 3.5rem 3rem"] {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* ─── RESPONSIVE 480px (mobile) ─── */
+@media (max-width: 480px) {
+  /* Hero */
+  .hero { padding: 90px 1.25rem 3.5rem; min-height: 100svh; }
+  .hero-eyebrow { font-size: 0.6rem; }
+  .hero-headline { font-size: clamp(2.2rem, 11vw, 3rem); margin-bottom: 1rem; }
+  .hero-sub { font-size: 0.9rem; margin-bottom: 1.75rem; }
+  .hero-actions { flex-direction: column; width: 100%; gap: 0.75rem; }
+  .btn-primary { width: 100%; justify-content: center; padding: 14px 20px; }
+  .btn-secondary { text-align: center; }
+
+  /* Problem */
+  .problem-grid { grid-template-columns: 1fr; }
+  .problem-num { font-size: 2.8rem; }
+
+  /* Workflow */
+  .workflow-steps { grid-template-columns: 1fr; gap: 0.75rem; }
+  .workflow { padding: 3rem 1.25rem; }
+
+  /* Outcomes */
+  .outcomes-breakdown-row {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+    gap: 0.5rem;
+  }
+  .outcomes-breakdown-equals { display: none; }
+  .outcomes-breakdown-label { font-size: 0.95rem; }
+  .outcomes-breakdown-result { font-size: 1.2rem; text-align: left; }
+  .outcomes-breakdown-row.total .outcomes-breakdown-result { font-size: 1.35rem; }
+  .roi-bar { padding: 1.75rem 1.25rem; }
+  .roi-bar-headline { font-size: 1.2rem; }
+  .roi-stats { flex-direction: column; gap: 1rem; }
+  .roi-stat-num { font-size: 1.4rem; }
+
+  /* Features */
+  .feature-group { padding: 2rem 1.25rem; }
+  .features-groups { gap: 2px; }
+
+  /* Testimonial / founder / secondary CTA inline sections */
+  [style*="padding: 5rem 3rem"] {
+    padding: 3rem 1.25rem !important;
+  }
+  [style*="padding: 3.5rem 3rem"] {
+    padding: 2.5rem 1.25rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  [style*="padding: 4rem 3rem"] {
+    padding: 3rem 1.25rem !important;
+  }
+
+  /* Testimonial quote font size */
+  blockquote { font-size: 1.15rem !important; }
+
+  /* Secondary CTA button */
+  [style*="padding: 3.5rem 3rem"] .btn-primary {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Pricing */
+  .pricing-card { padding: 1.75rem 1.25rem; }
+  .pricing-setup-val, .pricing-retainer-val { font-size: 1.35rem; }
+
+  /* Pilot */
+  .pilot-left, .pilot-right { padding: 2rem 1.25rem; }
+  .pilot-headline { font-size: 1.4rem; }
+
+  /* Final CTA */
+  .final-cta { padding: 4rem 1.25rem; }
+  .final-cta-headline { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+  .final-cta-actions { flex-direction: column; width: 100%; }
+  .btn-white { width: 100%; justify-content: center; }
+
+  /* Footer */
+  footer { padding: 2rem 1.25rem; gap: 1.5rem; }
+  .footer-right { flex-wrap: wrap; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logomark">
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect x="0" y="0" width="200" height="200" rx="30" ry="30" fill="#2F6FED"/><rect x="30" y="49" width="123" height="21" rx="4" fill="#ffffff"/><rect x="30" y="83" width="97" height="21" rx="4" fill="#ffffff" fill-opacity="0.75"/><rect x="30" y="117" width="72" height="21" rx="4" fill="#ffffff" fill-opacity="0.50"/><rect x="30" y="151" width="48" height="21" rx="4" fill="#ffffff" fill-opacity="0.28"/></svg>
+    </div>
+    <span class="nav-wordmark">Briefroom</span>
+  </a>
+  <div class="nav-actions">
+    <a href="https://app.briefroom.io/login" class="nav-login">Log in</a>
+    <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20Book%20a%20call" class="nav-cta">Book a call</a>
+  </div>
+  <button class="nav-hamburger" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#problem" onclick="closeMobileMenu()">The problem</a>
+  <a href="#workflow" onclick="closeMobileMenu()">How it works</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+  <a href="https://app.briefroom.io/login" onclick="closeMobileMenu()" style="color:rgba(255,255,255,0.5);">Log in</a>
+  <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20Book%20a%2030-minute%20call" class="mob-cta" onclick="closeMobileMenu()">Book a 30-minute call</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Editorial Intelligence · Briefroom</p>
+      <h1 class="hero-headline">
+        Your next story.<br>
+        <em>Already briefed.</em>
+      </h1>
+      <p class="hero-sub">
+        Briefroom monitors every editorial signal, surfaces the 20 stories worth covering today, and generates a full brief in your brand voice. Before your team sits down.
+      </p>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Live within 5 working days</span>
+        </div>
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>No IT involvement. No internal project. One kickoff call.</span>
+        </div>
+        <div class="hero-trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>If it doesn't save time in month one, we stop. No invoice.</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20Book%20a%2030-minute%20call" class="btn-primary">
+          Book a 30-minute call
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#workflow" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <p class="hero-card-label">Briefroom START · 3 editors · live result</p>
+      <div class="hero-stat-row">
+        <div class="hero-stat">
+          <span class="hero-stat-label">Time freed per editor/day</span>
+          <span class="hero-stat-value blue">2.5 hours</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Annual labour value recovered</span>
+          <span class="hero-stat-value">€72,000</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Additional revenue potential/yr</span>
+          <span class="hero-stat-value">€29,000</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Total annual value</span>
+          <span class="hero-stat-value green">€101,000</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Annual cost</span>
+          <span class="hero-stat-value">€4,800</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-label">Payback period</span>
+          <span class="hero-stat-value blue">1.1 months</span>
+        </div>
+      </div>
+      <p class="hero-card-note">Based on a sport publisher. 22 working days/month. €35/hr editorial rate. 25% of freed time reinvested in content.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section problem" id="problem">
+  <div class="section-inner">
+    <p class="section-tag">The problem</p>
+    <h2 class="section-headline">Publishers are great at their craft.<br>Buried under the process around it.</h2>
+    <p class="section-sub">Every morning, before a single story gets written, editorial teams lose hours to work that should never have been manual.</p>
+    <div class="problem-grid">
+      <div class="problem-item">
+        <div class="problem-num">200+</div>
+        <div class="problem-title">Signals arriving every day</div>
+        <p class="problem-body">RSS feeds, Reddit threads, press releases, social trends. Most never become a story, but someone has to read them all. Every single morning.</p>
+        <span class="problem-kicker">~2 hrs/editor filtering</span>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">3×</div>
+        <div class="problem-title">Competitors publish first</div>
+        <p class="problem-body">Without systematic coverage monitoring, you find out about the story after three competitors have already published. Missed stories are lost traffic, permanently.</p>
+        <span class="problem-kicker">Coverage gaps go undetected</span>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">45 min</div>
+        <div class="problem-title">Every brief built from scratch</div>
+        <p class="problem-body">Even when the story is found, building the brief takes 30 to 45 minutes. Every time. Angle, context, sources, tone. Starting from zero, every single day.</p>
+        <span class="problem-kicker">Repeated daily, per editor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="workflow" id="workflow">
+  <div class="section-inner">
+    <p class="section-tag" style="color:rgba(255,255,255,0.35);">How it works</p>
+    <h2 class="section-headline on-dark">From signal to story.<br>One automated workflow.</h2>
+    <p class="section-sub on-dark">Briefroom runs every morning while your team sleeps. By 9am, the day is already planned.</p>
+    <div class="workflow-steps">
+      <div class="workflow-step">
+        <div class="workflow-num">01</div>
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="workflow-title">Scan</div>
+        <p class="workflow-body">Your vertical scanned while you sleep. RSS feeds, Reddit, press releases, YouTube. All sources, every morning, automatically.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">02</div>
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="workflow-title">Score</div>
+        <p class="workflow-body">Every signal scored for editorial value, virality and Reddit engagement. The 20 stories that matter today, ranked. The rest, filtered.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">03</div>
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div class="workflow-title">Coverage Gap</div>
+        <p class="workflow-body">See instantly which hot stories competitors are covering that you haven't touched. Own the angle before the window closes.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">04</div>
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        </div>
+        <div class="workflow-title">Brief</div>
+        <p class="workflow-body">One click generates a full editorial brief in your brand voice. Angle, context, headline options, interview questions. Ready in under 60 seconds.</p>
+      </div>
+      <div class="workflow-step">
+        <div class="workflow-num">05</div>
+        <div class="workflow-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="workflow-title">Draft</div>
+        <p class="workflow-body">Brief becomes a concept article. News (350w) or analysis (700w), ready to edit. Assign directly from the Kanban planning board.</p>
+      </div>
+    </div>
+
+    <!-- BRIEFING ASSISTANT CALLOUT -->
+    <div class="assistant-callout">
+      <div class="assistant-callout-left">
+        <div class="assistant-callout-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="assistant-callout-label">Briefing assistant</div>
+          <div class="assistant-callout-title">Not sure about the angle? Just ask.</div>
+        </div>
+      </div>
+      <p class="assistant-callout-body">The briefing assistant is built into every brief. Ask it to suggest a different angle, find supporting sources, draft interview questions or check what competitors have written. It searches the web in real time and responds in the context of the story — no switching tools, no copy-pasting between tabs.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="section outcomes" id="outcomes">
+  <div class="section-inner">
+    <p class="section-tag">What it delivers</p>
+    <h2 class="section-headline">Briefroom costs 5% of what it delivers.</h2>
+    <p class="section-sub">Every number below is based on a real sport publisher. 3 editors, 22 working days/month, €35/hr. 25% of freed time reinvested in new content. The other 75% is yours. Adjust for your team: every extra editor multiplies the return.</p>
+    <div class="outcomes-breakdown">
+      <div class="outcomes-breakdown-row">
+        <div class="outcomes-breakdown-item">
+          <span class="outcomes-breakdown-label">2.5 hrs freed per editor/day</span>
+          <span class="outcomes-breakdown-calc">× 3 editors × 22 days × €35/hr × 12 months</span>
+        </div>
+        <div class="outcomes-breakdown-equals">→</div>
+        <div class="outcomes-breakdown-result">€72,000 labour recovered</div>
+      </div>
+      <div class="outcomes-breakdown-row">
+        <div class="outcomes-breakdown-item">
+          <span class="outcomes-breakdown-label">25% of freed time into new content</span>
+          <span class="outcomes-breakdown-calc">98 extra articles/mo × 5,000 pageviews × €5 RPM</span>
+        </div>
+        <div class="outcomes-breakdown-equals">→</div>
+        <div class="outcomes-breakdown-result">€29,000 extra revenue</div>
+      </div>
+      <div class="outcomes-breakdown-row total">
+        <div class="outcomes-breakdown-item">
+          <span class="outcomes-breakdown-label">Total annual value</span>
+          <span class="outcomes-breakdown-calc">Annual cost: €4,800 · Net: €96,000 · Payback: 1.1 months</span>
+        </div>
+        <div class="outcomes-breakdown-equals">→</div>
+        <div class="outcomes-breakdown-result">€101,000 / year</div>
+      </div>
+    </div>
+  </div>
+  <div class="roi-bar" style="max-width:1100px; margin: 2px auto 0;">
+    <div class="roi-bar-left">
+      <p class="roi-bar-tag">START tier · 3 editors · the ratio that matters</p>
+      <h3 class="roi-bar-headline">€101,000 value delivered.<br><span>€4,800 cost. That's the deal.</span></h3>
+      <p class="roi-note">Based on sport publisher profile. Results vary by vertical, team size and content reinvestment rate.</p>
+    </div>
+    <div class="roi-stats">
+      <div class="roi-stat">
+        <div class="roi-stat-num">21×</div>
+        <div class="roi-stat-label">ROI in year one</div>
+      </div>
+      <div class="roi-stat">
+        <div class="roi-stat-num">5%</div>
+        <div class="roi-stat-label">Cost ratio vs. value delivered</div>
+      </div>
+      <div class="roi-stat">
+        <div class="roi-stat-num">1.1 mo</div>
+        <div class="roi-stat-label">Setup payback period</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features" id="features">
+  <div class="section-inner">
+    <p class="section-tag">What you get</p>
+    <h2 class="section-headline">Built editorial-first.<br>Not adapted for editors.</h2>
+    <p class="section-sub">Every feature exists because a real editorial problem required it. No feature theatre.</p>
+    <div class="features-groups">
+      <div class="feature-group">
+        <div class="feature-group-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="feature-group-title">Signal Intelligence</div>
+        <p class="feature-group-sub">Everything worth knowing, already filtered before you sit down.</p>
+        <ul class="feature-list">
+          <li>Daily scan across RSS feeds, Reddit, press releases and YouTube</li>
+          <li>Every source and language covered, same stories not shown twice</li>
+          <li>Press releases turned into briefable story angles automatically</li>
+          <li>YouTube interviews and audio processed into usable story leads</li>
+          <li>Top 20 stories ranked by editorial value, every morning</li>
+        </ul>
+        <span class="feature-tier tier-start">START</span>
+      </div>
+      <div class="feature-group">
+        <div class="feature-group-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+        </div>
+        <div class="feature-group-title">Brief and Draft Generation</div>
+        <p class="feature-group-sub">From signal to publishable concept in one click.</p>
+        <ul class="feature-list">
+          <li>Full editorial brief in your brand voice, under 60 seconds</li>
+          <li>3 headline options per brief</li>
+          <li>Briefing assistant with web research and source lookup</li>
+          <li>Angles, interview questions and follow-up signals</li>
+          <li>Concept news articles (350w) ready to edit</li>
+          <li>Analysis pieces (700w) for deeper coverage</li>
+        </ul>
+        <span class="feature-tier tier-scale">START + SCALE</span>
+      </div>
+      <div class="feature-group">
+        <div class="feature-group-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="feature-group-title">Editorial Planning</div>
+        <p class="feature-group-sub">From brief to published, tracked in one place.</p>
+        <ul class="feature-list">
+          <li>Kanban planning board: assign and track every story</li>
+          <li>Coverage gap detection vs. your competitors</li>
+          <li>Archive refresh signals on your own top-traffic content</li>
+          <li>Follow-up angles on your own published stories</li>
+          <li>Overnight briefings ready before the day starts</li>
+          <li>Breaking news alerts with Slack notifications</li>
+        </ul>
+        <span class="feature-tier tier-scale">START + SCALE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing" id="pricing">
+  <div class="section-inner">
+    <p class="section-tag">Pricing</p>
+    <h2 class="section-headline">Simple pricing. No contracts.<br>No per-seat fees. Runs daily.</h2>
+    <p class="section-sub">One-time setup to configure your sources, calibrate your editorial voice and onboard your team. Then a monthly retainer that covers everything: daily runs, all API costs, monitoring and support.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <span class="pricing-badge">2 pilot spots remaining at this rate</span>
+        <div class="pricing-tier">START</div>
+        <div class="pricing-target">Solo publishers and small editorial teams · 1 to 4 editors</div>
+        <p class="pricing-setup-label">One-time setup</p>
+        <div class="pricing-setup-val">
+          <span style="text-decoration:line-through; opacity:0.35; font-size:1.1rem;">€2,000</span>
+          <span class="pricing-setup-waived">Waived for pilot partners</span>
+        </div>
+        <p class="pricing-setup-note">We absorb the setup cost for the 2 remaining pilot slots. In return: early feedback and a reference once you're live.</p>
+        <p class="pricing-retainer-label">Monthly retainer</p>
+        <div class="pricing-retainer-val">from €400/mo</div>
+        <p class="pricing-retainer-note">All daily runs, all API costs, monitoring, support and updates included.</p>
+        <div class="pricing-divider"></div>
+        <p class="pricing-includes">What's included</p>
+        <p class="pricing-tier-summary">Everything you need to automate your morning editorial workflow from day one. Signal scanning, story scoring, coverage gap detection, editorial briefs in your brand voice, concept articles and a Kanban planning board.</p>
+        <a href="mailto:tim@briefroom.io?subject=Briefroom%20START%20-%20Pilot%20spot%20inquiry" class="pricing-btn pricing-btn-outline">Book a call to discuss START</a>
+      </div>
+      <div class="pricing-card featured">
+        <span class="pricing-badge">SCALE</span>
+        <div class="pricing-tier">SCALE</div>
+        <div class="pricing-target">Mid-size publishers · 5 to 50 editors · multiple verticals</div>
+        <p class="pricing-setup-label">One-time setup</p>
+        <div class="pricing-setup-val">€4,000</div>
+        <p class="pricing-setup-note">Live within 5 working days. No IT involvement. Full multi-editor configuration included.</p>
+        <p class="pricing-retainer-label">Monthly retainer</p>
+        <div class="pricing-retainer-val">from €1,000/mo</div>
+        <p class="pricing-retainer-note">Everything in START, plus higher scan frequency, deeper content generation and team features.</p>
+        <div class="pricing-divider"></div>
+        <p class="pricing-includes">What's included</p>
+        <p class="pricing-tier-summary">Everything in START, built for larger teams. Higher scan frequency, deeper content generation, multi-editor assignment, SEO brief layer, newsletter drafts, GA4 tracking and multi-domain support.</p>
+        <a href="mailto:tim@briefroom.io?subject=Briefroom%20SCALE%20-%20Inquiry" class="pricing-btn pricing-btn-solid">Book a call to discuss SCALE</a>
+      </div>
+      <div class="pricing-card enterprise">
+        <span class="pricing-badge pricing-badge-enterprise">ENTERPRISE</span>
+        <div class="pricing-tier">ENTERPRISE</div>
+        <div class="pricing-target">Large publishers and media groups · multi-brand, multi-vertical</div>
+        <p class="pricing-setup-label">Pricing</p>
+        <div class="pricing-setup-val pricing-custom">Custom</div>
+        <p class="pricing-setup-note">Scoped per engagement. Contact Tim for a conversation about your operation.</p>
+        <div class="pricing-divider"></div>
+        <p class="pricing-includes">What's included</p>
+        <p class="pricing-tier-summary" style="color:rgba(255,255,255,0.5);">Everything in SCALE, built for multi-brand media groups. CMS integration, white-label, API access, competitor intelligence, enterprise SSO and dedicated support. Scoped to your operation.</p>
+        <a href="mailto:tim@briefroom.io?subject=Briefroom%20Enterprise%20-%20Inquiry" class="pricing-btn pricing-btn-enterprise">Contact Tim</a>
+      </div>
+    </div>
+    <p class="pricing-note">All pricing excludes VAT. <a href="mailto:tim@briefroom.io?subject=Briefroom%20Enterprise%20-%20Inquiry" style="color:var(--blue);">Contact Tim</a> to discuss Enterprise scope and pricing.</p>
+  </div>
+</section>
+
+<!-- FOUNDER STORY -->
+<section style="background:white; padding: 5rem 3rem; border-top: 1px solid var(--rule);">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <p style="font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blue); margin-bottom:1.5rem;">Why this exists</p>
+    <h2 style="font-family:'Inter Tight',sans-serif; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800; letter-spacing:-0.03em; color:var(--ink); line-height:1.15; margin-bottom:1.5rem;">I built Briefroom because I sat in the same editorial meeting you're sitting in right now.</h2>
+    <div style="font-size:0.95rem; color:var(--ink-mid); line-height:1.85;">
+      <p style="margin-bottom:1rem;">I ran editorial and commercial operations for an international publisher for ten years. We had hundreds of signals arriving daily. We had good editors and we still missed stories. Not because the team wasn't capable, but because the volume was simply not processable by humans. That gap is where Briefroom was born.</p>
+      <p style="margin-bottom:1rem;">I watched editors spend their best hours filtering rather than writing. I watched stories get missed because nobody had time to check what competitors had covered. I watched briefs get built from scratch, every single time, when most of the work was the same work we'd done the day before.</p>
+      <p style="font-weight:600; color:var(--ink);">Briefroom is the system I wished I'd had. Built from the inside out.</p>
+    </div>
+    <div style="margin-top:2rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+      <div style="width:44px; height:44px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; font-family:'Inter Tight',sans-serif; font-weight:800; color:white; font-size:1rem; flex-shrink:0;">T</div>
+      <div>
+        <div style="font-family:'Inter Tight',sans-serif; font-weight:700; font-size:0.9rem; color:var(--ink);">Tim Biesbrouck</div>
+        <div style="font-size:0.78rem; color:var(--ink-light);">Founder, Biesbrouck Automation · 10 years in international online publishing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECONDARY CTA / LEAD CAPTURE -->
+<section style="background:var(--blue-lt); padding: 3.5rem 3rem; border-top: 1px solid var(--blue-mid);">
+  <div style="max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2rem; flex-wrap:wrap;">
+    <div>
+      <p style="font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blue); margin-bottom:0.5rem;">Not ready to talk yet?</p>
+      <h3 style="font-family:'Inter Tight',sans-serif; font-size:1.2rem; font-weight:800; color:var(--navy); letter-spacing:-0.02em; margin-bottom:0.35rem;">Get the full ROI calculation for your vertical.</h3>
+      <p style="font-size:0.83rem; color:var(--ink-mid);">A one-page breakdown showing exactly what Briefroom would deliver for your specific team size and content type. No call required.</p>
+    </div>
+    <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20ROI%20berekening" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">
+      Request the calculation
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- PILOT + GUARANTEE -->
+<section class="section pilot" id="pilot">
+  <div class="section-inner">
+    <p class="section-tag">Pilot programme</p>
+    <h2 class="section-headline">3 pilot spots.<br>2 still open.</h2>
+    <div class="pilot-inner">
+      <div class="pilot-left">
+        <div class="pilot-spots">
+          <div class="pilot-spot filled"></div>
+          <div class="pilot-spot"></div>
+          <div class="pilot-spot"></div>
+        </div>
+        <h3 class="pilot-headline">Spot 1 active.<br>Spots 2 and 3 open.</h3>
+        <p class="pilot-sub">Briefroom is currently running in production for a B2B publisher in the motorsport vertical. Two pilot slots remain open for publishers who want to be part of the early commercial phase and receive founder-rate pricing locked for 12 months.</p>
+        <div class="pilot-ref">
+          <p class="pilot-ref-label">Reference implementation</p>
+          <p class="pilot-ref-text">Sport and F1 vertical. Built and validated in a market I know from the inside: 10 years as Country Director at Motorsport Network. The test environment runs on live F1 content, daily, without manual intervention since March 2026.</p>
+        </div>
+      </div>
+      <div class="pilot-right">
+        <div>
+          <span class="guarantee-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            First-month guarantee
+          </span>
+          <h3 class="guarantee-headline">If Briefroom doesn't free up measurable time in the first month, we stop. No discussion.</h3>
+          <p class="guarantee-body">This is not a standard SaaS trial. If your editors are not spending less time on signal monitoring and briefing within 30 days of going live, the engagement ends. No invoice, no awkward conversation.</p>
+          <ul class="guarantee-list">
+            <li><span>✓</span><span>Live within 5 working days of onboarding</span></li>
+            <li><span>✓</span><span>No workflow disruption. Editors decide what to do with the output.</span></li>
+            <li><span>✓</span><span>Add capabilities as your team grows</span></li>
+            <li><span>✓</span><span>Founder rates locked for 12 months on pilot slots</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <p class="final-cta-eyebrow">Your next story, already briefed</p>
+    <h2 class="final-cta-headline">2 pilot spots open. Your editors could have their first briefing next week.</h2>
+    <p class="final-cta-sub">You'd be joining a live production pipeline that has been running daily since March 2026. Book a 30-minute call. No preparation needed. Just a conversation about your editorial operation and whether Briefroom fits.</p>
+    <div class="final-cta-actions">
+      <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20Book%20a%2030-minute%20call" class="btn-white">
+        Book a 30-minute call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-left">Briefroom<span>.</span></div>
+    <div class="footer-parent">A product by <a href="https://biesbrouckautomation.com" target="_blank" style="color:rgba(255,255,255,0.3); text-decoration:none;">Biesbrouck Automation</a></div>
+  </div>
+  <div class="footer-right">
+    <a href="https://app.briefroom.io/login">Log in</a>
+    <a href="https://biesbrouckautomation.com" target="_blank">Biesbrouck Automation</a>
+    <a href="https://linkedin.com/in/timbiesbrouck/" target="_blank">LinkedIn</a>
+    <a href="mailto:tim@briefroom.io?subject=Briefroom%20-%20Contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => {
+  const isOpen = menu.classList.toggle('open');
+  toggle.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+});
+function closeMobileMenu() {
+  menu.classList.remove('open');
+  toggle.classList.remove('open');
+}
+document.addEventListener('click', (e) => {
+  if (!menu.contains(e.target) && !toggle.contains(e.target)) closeMobileMenu();
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
+      observer.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
