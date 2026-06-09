@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://briefroom.io/sitemap.xml
